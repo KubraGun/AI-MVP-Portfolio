@@ -57,7 +57,7 @@ ollama list
 Kısaca karşılaştığım hatanın sabebi:
 
 |Neden                               |Çözümü                          |
-|---------------------------------------------------------------------|
+|------------------------------------|--------------------------------|
 |GPU bellek yetersizliği             | llama3.2:1b veya 3b-q4_K_M     |
 |Ollama eski çalışan model çakışması | ollama stop all                |
 |CPU yetersiz (Chrome çok harcıyor)  | ollama run --gpu false         | 
@@ -66,116 +66,215 @@ Kısaca karşılaştığım hatanın sabebi:
 
 ## Terminal Tourist Bot (`terminal_tourist_bot.py`)
 START
+
 │
+
 ├─ Import libraries (ChatOllama, SystemMessage, HumanMessage, ConversationBufferMemory)
+
 │
+
 ├─ Initialize LLM with llama3.2:3b model
+
 │
+
 ├─ Create memory buffer for conversation history
+
 │
+
 ├─ Display welcome message
+
 │
+
 └─ ENTER MAIN LOOP:
+
 │
+
 ├─ Wait for user input
+
 │
+
 ├─ IF input == "quit" → BREAK LOOP
+
 │
+
 ├─ ELSE:
+
 │ │
+
 │ ├─ Add user message to memory
+
 │ │
+
 │ ├─ Construct messages array:
+
 │ │ 1. System role instruction
+
 │ │ 2. Conversation history from memory
+
 │ │ 3. Current user input
+
 │ │
+
 │ ├─ Send to LLM for processing
+
 │ │
+
 │ ├─ Receive complete response
+
 │ │
+
 │ ├─ Add AI response to memory
+
 │ │
+
 │ └─ Display response in terminal
+
 │
+
 └─ REPEAT LOOP
 
 ## Basic Streamlit Bot (`streamlit_tourist_bot.py`)
 
 START
+
 │
+
 ├─ Import Streamlit and LangChain components
+
 │
+
 ├─ Configure Streamlit page (title, icon, description)
+
 │
+
 ├─ INITIALIZE SESSION STATE:
+
 │ │
+
 │ └─ IF no memory exists → Create ConversationBufferMemory
+
 │
+
 ├─ Load Llama model
+
 │
+
 ├─ Display chat input field
+
 │
+
 ├─ RENDER EXISTING CHAT HISTORY:
+
 │ │
+
 │ ├─ FOR each message in memory:
+
 │ │ │
+
 │ │ ├─ IF HumanMessage → Display in user bubble
+
 │ │ │
+
 │ │ └─ ELSE → Display in AI bubble
+
 │
+
 └─ ON NEW USER INPUT:
+
 │
+
 ├─ Add user message to memory
+
 │
+
 ├─ Build messages array:
+
 │ System prompt + History + Current input
+
 │
+
 ├─ Get response from LLM (complete generation)
+
 │
+
 ├─ Store AI response in memory
+
 │
+
 └─ Trigger UI refresh to show new messages
 
 
 ## Streaming Streamlit Bot (`streamlit_tourist_bot_streaming.py`)
 START
+
 │
+
 ├─ Import streaming-specific callbacks
+
 │
+
 ├─ DEFINE StreamHandler class:
+
 │ │
+
 │ ├─ init: Store placeholder reference
+
 │ │
+
 │ └─ on_llm_new_token: Append token and update UI
+
 │
+
 ├─ Streamlit page configuration
+
 │
+
 ├─ Initialize session memory
+
 │
+
 ├─ Display chat history (same as basic version)
+
 │
+
 └─ ON USER INPUT:
+
 │
+
 ├─ Store user message in memory
+
 │
+
 ├─ Display user message immediately
+
 │
+
 ├─ Create empty response placeholder
+
 │
+
 ├─ Initialize StreamHandler with placeholder
+
 │
+
 ├─ Configure LLM with streaming enabled + callback
+
 │
+
 ├─ Build messages array
+
 │
+
 ├─ Send to LLM → Tokens stream to handler in real-time
+
 │
+
 └─ Final response stored in memory after completion
 
 
 ## Core Algorithm Pattern 
 Memory Management:
+
 User Input → Add to Memory → Process → AI Response → Add to Memory
 ↑ │
 └──────────────────────────────────────┘
