@@ -276,6 +276,7 @@ START
 Memory Management:
 
 User Input → Add to Memory → Process → AI Response → Add to Memory
+
 ↑ │
 └──────────────────────────────────────┘
 
