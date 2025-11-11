@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Gemini ile Akıllı Asistan",
+    "\\GPT Sesli Asistan",
+    "\\LLama ile Akıllı Turizm Rehberi",
     "\\RNN ile Duygu Dedektifi"
   ],
-  "SelectedNode": "\\RNN ile Duygu Dedektifi\\development_notes.md",
+  "SelectedNode": "\\GPT Sesli Asistan\\development_notes.md",
   "PreviewInSolutionExplorer": false
 }
